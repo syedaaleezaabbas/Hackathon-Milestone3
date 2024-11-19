@@ -1,67 +1,43 @@
-// Listing Element
-document.getElementById('resumeForm')?.addEventListener('submit', function (event) {
-    event.preventDefault();
+// Get refrences to the form and display area
+const form = document.getElementById('resume-form') as HTMLFormElement;
+const resumeDisplayElement = document.getElementById('resume-display') as HTMLDivElement;
 
+// Handle form submission
+form.addEventListener('submit', (event: Event) => {
+    event.preventDefault(); // prevent page reload
 
+    //Collect input values
+    const name = (document.getElementById('name') as HTMLInputElement).value;
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+    const phone = (document.getElementById('phone') as HTMLInputElement).value;
+    const address = (document.getElementById('address') as HTMLInputElement).value;
+    const education = (document.getElementById('education') as HTMLInputElement).value;
+    const experience = (document.getElementById('experience') as HTMLInputElement).value;
+    const skills = (document.getElementById('skills') as HTMLInputElement).value;
 
-    const profilePictureInput = document.getElementById('profilePicture') as HTMLInputElement;
+    // Generate the resume content dynamically
+    const resumeHTML = `
+<h2><b>Resume</b></h2>
 
+<h3>Personal Information<h3>
+<p><b>Name: </b>${name}</p>
+<p><b>Email: </b>${email}</p>
+<p><b>Phone: </b>${phone}</p>
+<p><b>Address: </b>${address}</p>
 
-    // Type Assertion
-    const nameElement = document.getElementById('name') as HTMLInputElement;
-    const emailElement = document.getElementById('email') as HTMLInputElement;
-    const phoneElement = document.getElementById('phone') as HTMLInputElement;
-    const addressElement = document.getElementById('address') as HTMLInputElement
-    const educationElement = document.getElementById('education') as HTMLTextAreaElement;
-    const experienceElement = document.getElementById('experience') as HTMLTextAreaElement;
-    const skillsElement = document.getElementById('skills') as HTMLTextAreaElement;
+<h3>Education<h3>
+<p>${education}</p>
 
+<h3>Experience<h3>
+<p>${experience}</p>
 
-    if (profilePictureInput && nameElement && emailElement && phoneElement && addressElement && educationElement && experienceElement && skillsElement) {
-        const name = nameElement.value;
-        const email = emailElement.value;
-        const phone = phoneElement.value;
-        const address = addressElement.value;
-        const education = educationElement.value;
-        const experience = experienceElement.value;
-        const skills = skillsElement.value;
-
-
-        // picture elements
-        const profilePictureFile = profilePictureInput.files?.[0]
-        const profilePictureURL = profilePictureFile ? URL.createObjectURL(profilePictureFile) : '';
-
-
-
-        // Create resume output
-        const resumeOutput = `
-    <h2>Resume</h2>
-    ${profilePictureURL ? `<img src="${profilePictureURL}" alt="Profile Picture" class="profilePicture">` : ""}
-    <p><strong>Full Name:</strong> ${name} </p>
-    <p><strong>Email:</strong> ${email} </p>
-    <p><strong>Phone Number:</strong> ${phone} </p>
-    <p><strong>Address:</strong> ${address} </p>
-
-    
-    <h3>Education</h3>
-    <p>${education}</p>
-
-    <h3>Experience</h3>
-    <p>${experience}</p>
-
-    <h3>Skills</h3>
-    <p>${skills}</p>
-    `;
-
-
-
-        const resumeOutputElement = document.getElementById('resumeOutput')
-        if (resumeOutputElement) {
-            resumeOutputElement.innerHTML = resumeOutput
-        } else {
-            console.error('the resume output elements are missing')
-        }
+<h3>Skills<h3>
+<p>${skills}</p>
+`
+    // Display the generated resume
+    if (resumeDisplayElement) {
+        resumeDisplayElement.innerHTML = resumeHTML;
     } else {
-        console.error('one or more output elements are missing')
+        console.error('The resume display element is missing.')
     }
 })
