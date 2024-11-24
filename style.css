@@ -2,7 +2,7 @@ body {
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: #f5f5f5;
 }
 
 h1 {
@@ -65,7 +65,7 @@ button {
     cursor: pointer;
     margin-top: 10px;
     font-family: 'Times New Roman', Times, serif;
-    box-sizing: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 button:hover {
